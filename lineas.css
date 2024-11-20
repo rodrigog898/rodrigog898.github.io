@@ -1,0 +1,12 @@
+:root {
+    --size: 45px;
+    --line: color-mix(in lch, white, transparent 85%);
+    background: linear-gradient(
+          90deg,
+          var(--line) 1px,
+          transparent 1px var(--size)
+        )
+        50% 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+        var(--size) var(--size), hwb(216 37% 61%);
+  }
