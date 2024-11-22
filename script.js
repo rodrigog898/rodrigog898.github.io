@@ -40,3 +40,24 @@ document.querySelector('.button-container button').addEventListener('click', () 
   const skillsSection = document.querySelector('#skills');
   skillsSection.style.display = 'block'; // Mostrar la sección #skills
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.category').forEach(category => {
+    const button = category.querySelector('.show-more');
+    const skillsGrid = category.querySelector('.skills-grid');
+
+    if (button && skillsGrid) {
+      button.addEventListener('click', () => {
+        if (skillsGrid.classList.contains('show-all')) {
+          skillsGrid.classList.remove('show-all');
+          button.textContent = 'Ver Más';
+        } else {
+          skillsGrid.classList.add('show-all');
+          button.textContent = 'Ver Menos';
+        }
+      });
+    } else {
+      console.warn('El botón o el contenedor no se encontraron en esta categoría.');
+    }
+  });
+});

@@ -164,10 +164,7 @@ button:is(:focus-visible, :hover) {
   --intent: 1;
 }
 
-main {
-  width: 600px;
-  max-width: calc(100% - 2rem);
-}
+
 
 .bear-link {
   color: canvasText;
