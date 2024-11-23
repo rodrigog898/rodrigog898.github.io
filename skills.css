@@ -1,52 +1,81 @@
-/* Contenedor principal de habilidades */
-.habilidades {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 20px; /* Espaciado interno para separarlo de los bordes */
+:root {
+  /* Variables comunes para ambos temas */
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --card-hover: #f0f0f0;
+  --text-color: #333333;
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --rating-filled: #ff9800;
+  --rating-unfilled: #ddd;
+  --button-bg: #ff9800;
+  --button-hover: #ff9800;
+  --button-text: #ffffff;
 }
 
-/* Contenedor de categorías */
+[data-theme="dark"] {
+  /* Variables específicas para modo oscuro */
+  --background-color: #121212;
+  --card-background: #2e2e2e;
+  --card-hover: #333333;
+  --text-color: #ffffff;
+  --border-color: #333;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --rating-filled: #ff9800;
+  --rating-unfilled: #444;
+  --button-bg: #ff9800;
+  --button-hover: #ff9800;
+  --button-text: #ffffff;
+}
+
+/* Estilos generales usando variables */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.habilidades {
+  margin: -20px auto 0;
+}
+
 .categories-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Dos columnas de categorías en pantallas grandes */
-  gap: 20px; /* Espaciado entre categorías */
+  gap: 20px;
   width: 100%;
 }
 
-/* Cada categoría */
 .category {
-  background-color: #2e2e2e;
+  background-color: var(--card-background);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
 
-/* Efecto hover en la categoría */
 .category:hover {
   transform: translateY(-5px);
+  background-color: var(--card-hover);
 }
 
-/* Título de cada categoría */
 .category h2 {
   text-align: left;
   font-size: 1.8rem;
   margin-bottom: 15px;
-  color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-  border-bottom: 2px solid #444;
+  color: var(--text-color);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 5px;
 }
 
-/* Contenedor de habilidades */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas de habilidades en pantallas grandes */
-  gap: 10px; /* Espaciado entre habilidades */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   margin-top: 10px;
 }
 
-/* Ocultar habilidades a partir de la número 10 */
 .skills-grid .skill:nth-child(n+11) {
   display: none;
 }
@@ -55,31 +84,28 @@
   display: flex;
 }
 
-/* Estilo de las habilidades */
 .skill {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1f1f1f;
+  background-color: var(--card-background);
   padding: 10px 15px;
   border-radius: 8px;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
   transition: background-color 0.3s, transform 0.3s;
 }
 
 .skill:hover {
-  background-color: #333;
+  background-color: var(--card-hover);
   transform: translateY(-2px);
 }
 
-/* Texto de la habilidad */
 .skill span {
   font-size: 1rem;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--text-color);
 }
 
-/* Calificaciones (rating) */
 .rating {
   display: flex;
   gap: 5px;
@@ -89,67 +115,62 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #444;
+  background-color: var(--rating-unfilled);
 }
 
 .rating .filled {
-  background-color: #ffffff;
+  background-color: var(--rating-filled);
 }
 
-/* Botón "Ver Más" */
 .show-more {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 20px;
   font-size: 1rem;
   font-weight: bold;
-  color: #ffffff;
-  background-color: #007bff;
+  color: var(--button-text);
+  background-color: var(--button-bg);
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, transform 0.3s;
   text-align: center;
 }
 
 .show-more:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover);
   transform: translateY(-2px);
 }
 
-/* Responsividad */
 @media (max-width: 1200px) {
-  /* Reduzco el número de columnas a 1 en el contenedor de categorías */
   .categories-container {
-    grid-template-columns: 1fr; /* Una columna para categorías */
+    grid-template-columns: 1fr;
     gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  /* Ajustes adicionales para pantallas pequeñas */
   .categories-container {
-    grid-template-columns: 1fr; /* Una categoría por fila */
+    grid-template-columns: 1fr;
   }
 
   .skills-grid {
-    grid-template-columns: 1fr; /* Una columna para habilidades */
+    grid-template-columns: 1fr;
   }
 
   .category h2 {
-    font-size: 1.5rem; /* Ajusto el tamaño del texto del título */
-    text-align: center; /* Centrar el título en pantallas pequeñas */
+    font-size: 1.5rem;
+    text-align: center;
   }
 }
 
 @media (max-width: 480px) {
-  /* Ajustes para pantallas extra pequeñas */
   .category {
-    padding: 15px; /* Reduzco el padding interno */
+    padding: 15px;
   }
 
   .show-more {
-    padding: 8px 15px; /* Ajusto el tamaño del botón */
+    padding: 8px 15px;
     font-size: 0.9rem;
   }
 }

@@ -173,7 +173,7 @@ button:is(:focus-visible, :hover) {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  width: 48px;
+  width: 50px;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -184,7 +184,7 @@ button:is(:focus-visible, :hover) {
   opacity: 1;
 }
 .bear-link svg {
-  width: 75%;
+  width: 25%;
 }
 
 .typing-effect {

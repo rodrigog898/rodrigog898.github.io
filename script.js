@@ -31,6 +31,22 @@ button.addEventListener('click', handleSync);
 
 // Actualización inicial del contenido respetando el texto del HTML
 document.querySelector('.button-container button').addEventListener('click', () => {
+  updateSkillsSection();
+});
+
+// Asociar el comportamiento al botón en el `<li>`
+document.querySelector('#habilidades-link').addEventListener('click', () => {
+  updateSkillsSection();
+});
+
+// Asociar el comportamiento al botón en el `<li>`
+document.querySelector('#experiencia-his').addEventListener('click', () => {
+  updateexperienceSection();
+});
+
+
+// Función compartida para actualizar la sección
+function updateSkillsSection() {
   // Ocultar todo el contenido del cuerpo excepto la sección #skills
   document.querySelectorAll('main > *:not(#skills)').forEach(element => {
     element.style.display = 'none'; // Oculta todo lo demás
@@ -39,7 +55,21 @@ document.querySelector('.button-container button').addEventListener('click', () 
   // Asegurarnos de que la sección #skills sea visible
   const skillsSection = document.querySelector('#skills');
   skillsSection.style.display = 'block'; // Mostrar la sección #skills
-});
+}
+
+function updateexperienceSection() {
+  // Ocultar todo el contenido del cuerpo excepto la sección #skills
+  document.querySelectorAll('main > *:not(#experiencia)').forEach(element => {
+    element.style.display = 'none'; // Oculta todo lo demás
+  });
+
+  // Asegurarnos de que la sección #skills sea visible
+  const experienceSection = document.querySelector('#experiencia');
+  experienceSection.style.display = 'block'; // Mostrar la sección #skills
+}
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.category').forEach(category => {

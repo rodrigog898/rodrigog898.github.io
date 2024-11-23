@@ -1,0 +1,246 @@
+:root {
+    /* Variables para Light Mode */
+    --background-color: #ffffff;
+    --section-bg-color: #f4f4f4;
+    --timeline-bg-color: #eaeaea;
+    --timeline-point-color: #ff9800;
+    --timeline-line-color: #ff9800;
+    --text-color: #333333;
+    --subtext-color: #555555;
+    --highlight-color: #ff9800;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  [data-theme="dark"] {
+    /* Variables para Dark Mode */
+    --background-color: #1e1e1e;
+    --section-bg-color: #292929;
+    --timeline-bg-color: #292929;
+    --timeline-point-color: #ff9800;
+    --timeline-line-color: #ff9800;
+    --text-color: #ffffff;
+    --subtext-color: #bdc3c7;
+    --highlight-color: #ff9800;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Contenedor Principal */
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--section-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    width: 90%;
+    box-sizing: border-box;
+  }
+  
+  /* Títulos de Secciones */
+  .section h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  
+  /* Línea de Tiempo */
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+  
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--timeline-line-color);
+    z-index: 1;
+  }
+  
+  .timeline-item:last-child::before {
+    height: 50%;
+  }
+  
+  .timeline-item::after {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background-color: var(--timeline-point-color);
+    border-radius: 50%;
+    z-index: 2;
+    border: 2px solid var(--section-bg-color);
+  }
+  
+  /* Contenido de la Línea de Tiempo */
+  .timeline-content {
+    margin-left: 60px;
+    background-color: var(--timeline-bg-color);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-left: 5px solid var(--highlight-color);
+    width: calc(100% - 60px);
+    box-sizing: border-box;
+  }
+  
+  /* Roles */
+  .role {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Empresa y Fechas */
+  .company-date {
+    font-size: 0.9rem;
+    color: var(--subtext-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  
+  /* Descripción */
+  .description {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Lista de Responsabilidades */
+  .responsibilities {
+    list-style: none;
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+  
+  .responsibilities li {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    line-height: 1.4;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .responsibilities li::before {
+    content: "✓";
+    position: absolute;
+    left: -1.5rem;
+    color: var(--highlight-color);
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  /* Responsivo para Pantallas Pequeñas */
+  @media (max-width: 768px) {
+    .timeline-item {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 0;
+    }
+  
+    .timeline-item::before {
+      display: none;
+    }
+  
+    .timeline-item::after {
+      left: 0;
+      top: 0;
+      margin-bottom: 1rem;
+    }
+  
+    .timeline-content {
+      margin-left: 0;
+      padding: 1rem 1.5rem;
+      width: 100%;
+    }
+  
+    .section h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  
+    .description,
+    .responsibilities li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  }
+  
+  /* Responsivo para Pantallas Muy Pequeñas */
+  @media (max-width: 480px) {
+    .container {
+      padding: 1rem;
+      margin: 1rem auto;
+    }
+  
+    .timeline-content {
+      padding: 1rem;
+    }
+  
+    .role {
+      font-size: 1.4rem;
+    }
+  
+    .description,
+    .responsibilities li {
+      font-size: 0.8rem;
+    }
+  
+    .section h1 {
+      font-size: 1.5rem;
+    }
+  
+    .timeline-item::after {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  
+  /* Ajustes adicionales para mejorar la responsividad */
+  @media (max-width: 600px) {
+    .role {
+      font-size: 1.2rem;
+    }
+  
+    .company-date {
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .section h1 {
+      font-size: 1.2rem;
+    }
+  
+    .description,
+    .responsibilities li {
+      font-size: 0.7rem;
+    }
+  
+    .timeline-content {
+      padding: 0.8rem;
+    }
+  
+    .timeline-item::after {
+      width: 8px;
+      height: 8px;
+    }
+  }
+  

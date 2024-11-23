@@ -1,8 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-
-.navbar-container {
+:root {
+	--navbar-bg: #f8f9fa; /* Fondo claro para modo light */
+	--navbar-text-color: #333333; /* Texto oscuro para modo light */
+	--navbar-hover-bg: #406ff3; /* Fondo de hover azul */
+	--navbar-hover-text-color: #ffffff; /* Texto blanco en hover */
+	--tooltip-bg: #ffffff; /* Fondo blanco para el tooltip */
+	--tooltip-text-color: #406ff3; /* Texto azul en el tooltip */
+	--shadow-color: rgba(0, 0, 0, 0.1); /* Sombra clara */
+  }
+  
+  [data-theme="dark"] {
+	--navbar-bg: #121212; /* Fondo oscuro para modo dark */
+	--navbar-text-color: #ffffff; /* Texto claro para modo dark */
+	--navbar-hover-bg: #333333; /* Fondo gris oscuro en hover */
+	--navbar-hover-text-color: #ffffff; /* Texto blanco en hover */
+	--tooltip-bg: #333333; /* Fondo oscuro para el tooltip */
+	--tooltip-text-color: #ffffff; /* Texto claro en el tooltip */
+	--shadow-color: rgba(0, 0, 0, 0.5); /* Sombra más intensa */
+  }
+  
+  /* Estilos generales */
+  .navbar-container {
 	position: fixed;
-	/* Fija el nav en el lado izquierdo */
 	top: 0;
 	left: 0;
 	height: 100vh;
@@ -11,83 +29,74 @@
 	align-items: center;
 	padding-left: 1rem;
 	z-index: 10;
-	/* Asegura que el navbar esté encima de otros elementos */
-}
-
-.navbar {
+  }
+  
+  .navbar {
 	font-family: 'Open Sans', sans-serif;
+	background: var(--navbar-bg); /* Fondo dinámico */
 	border-radius: 10px;
 	padding: 1rem 0;
-	box-shadow: 0 0 100px rgba(0, 0, 0, 0.03);
+	box-shadow: 0 0 100px var(--shadow-color); /* Sombra dinámica */
 	width: 4rem;
-}
-
-
-.navbar__menu {
+  }
+  
+  .navbar__menu {
 	list-style: none;
-	/* Elimina los puntos de las listas */
 	margin: 0;
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	/* Asegura que los elementos estén en columna */
 	align-items: center;
-}
-
-.navbar__item {
+  }
+  
+  .navbar__item {
 	position: relative;
 	margin: 0.5rem 0;
-	/* Espaciado entre los ítems */
-}
-
-.navbar__link {
+  }
+  
+  .navbar__link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 3.5rem;
 	width: 3.5rem;
-	color: #6a778e;
+	color: var(--navbar-text-color); /* Color dinámico */
 	text-decoration: none;
-	/* Elimina subrayado */
 	transition: 250ms ease all;
 	position: relative;
 	z-index: 1;
 	border-radius: 20%;
-	/* Hace el fondo azul circular */
-}
-
-.navbar__link span {
+  }
+  
+  .navbar__link:hover {
+	color: var(--navbar-hover-text-color); /* Texto dinámico en hover */
+  }
+  
+  .navbar__item:hover .navbar__link {
+	background: var(--navbar-hover-bg); /* Fondo dinámico en hover */
+  }
+  
+  .navbar__link span {
 	position: absolute;
 	left: 120%;
-	/* Mueve el texto fuera del ícono */
 	transform: translateX(0);
 	opacity: 0;
 	pointer-events: none;
-	color: #406ff3;
-	background: #fff;
+	color: var(--tooltip-text-color); /* Color del texto dinámico */
+	background: var(--tooltip-bg); /* Fondo dinámico */
 	padding: 0.5rem 1rem;
 	transition: 250ms ease all;
 	border-radius: 20px;
 	white-space: nowrap;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar__link:hover {
-	color: #fff;
-	/* Cambia el color del ícono al pasar el ratón */
-}
-
-.navbar__item:hover .navbar__link {
-	background: #406ff3;
-	/* Fondo azul en hover */
-}
-
-.navbar__item:hover .navbar__link span {
+	box-shadow: 0 2px 10px var(--shadow-color); /* Sombra dinámica */
+  }
+  
+  .navbar__item:hover .navbar__link span {
 	opacity: 1;
 	transform: translateX(0);
-}
-
-.navbar__link i {
+  }
+  
+  .navbar__link i {
 	font-size: 1.5rem;
-	/* Tamaño del ícono */
-}
+  }
+  
