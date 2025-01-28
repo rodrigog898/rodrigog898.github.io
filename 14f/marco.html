@@ -71,10 +71,19 @@
             border: 5px solid white;
             box-sizing: border-box;
         }
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
+
+        /* Animación para elementos flotantes (corazones y flores) */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Corazones flotantes */
         .floating-heart {
             position: fixed;
             font-size: 24px;
@@ -84,10 +93,18 @@
             opacity: 0.6;
             animation: float 3s ease-in-out infinite;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
+
+        /* Flores flotantes (mismo estilo base que .floating-heart, se puede personalizar) */
+        .floating-flower {
+            position: fixed;
+            font-size: 24px;
+            color: #ff4d4d;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+            animation: float 3s ease-in-out infinite;
         }
+
         @media (min-width: 768px) {
             .gallery {
                 flex-direction: row;
@@ -99,6 +116,7 @@
                 margin: 0;
             }
         }
+
         @media (max-width: 480px) {
             .photo-frame {
                 width: 200px;
@@ -131,6 +149,9 @@
             '6.jpg',
             '7.jpg',
         ];
+
+        // Arreglo de flores
+        const flowers = ['🌸','🌺','🌹','🌷','🌼','💐','🌻','🏵️'];
 
         function createPhotoElement(src) {
             const container = document.createElement('div');
@@ -167,8 +188,9 @@
             gallery.appendChild(createPhotoElement(photo));
         });
 
-        // Añadir corazones flotantes al fondo
+        // Crear corazones flotantes
         function createFloatingHearts() {
+            // Eliminar corazones previos
             const hearts = document.querySelectorAll('.floating-heart');
             hearts.forEach(heart => heart.remove());
 
@@ -186,9 +208,38 @@
             }
         }
 
-        // Crear corazones flotantes iniciales y actualizarlos cuando cambie el tamaño de la ventana
-        createFloatingHearts();
-        window.addEventListener('resize', createFloatingHearts);
+        // Crear flores flotantes
+        function createFloatingFlowers() {
+            // Eliminar flores previas
+            const existingFlowers = document.querySelectorAll('.floating-flower');
+            existingFlowers.forEach(flower => flower.remove());
+
+            const numberOfFlowers = Math.min(window.innerWidth / 40, 15);
+            
+            for (let i = 0; i < numberOfFlowers; i++) {
+                const flowerEl = document.createElement('span');
+                flowerEl.className = 'floating-flower';
+                // Tomamos un ícono aleatorio de 'flowers'
+                flowerEl.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                flowerEl.style.left = `${Math.random() * 100}vw`;
+                flowerEl.style.top = `${Math.random() * 100}vh`;
+                flowerEl.style.animation = `float ${Math.random() * 3 + 2}s ease-in-out infinite`;
+                flowerEl.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(flowerEl);
+            }
+        }
+
+        // Crea corazones y flores flotantes iniciales
+        function initFloatingDecorations() {
+            createFloatingHearts();
+            createFloatingFlowers();
+        }
+
+        // Llamar a la función al cargar la página
+        initFloatingDecorations();
+
+        // Actualizar corazones y flores cuando cambie el tamaño de la ventana (opcional)
+        window.addEventListener('resize', initFloatingDecorations);
     </script>
 </body>
 </html>
