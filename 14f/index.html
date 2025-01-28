@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff3355;
+        }
+
+        #message {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ff4d6d;
+            display: none; /* Se oculta inicialmente */
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-20px);
+                opacity: 1;
+            }
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: floatFlower 15s linear infinite;
+        }
+
+        @keyframes floatFlower {
+            0% {
+                transform: translate(-100%, -100%) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, 100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .stickman-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        .stickman {
+            width: 50px;
+            height: 100px;
+            position: relative;
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+        .stickman::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+            top: 0;
+            left: 0;
+        }
+
+        .stickman::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background-color: #000;
+            top: 50px;
+            left: 24px;
+        }
+
+        .stickman .arm {
+            width: 40px;
+            height: 2px;
+            background-color: #000;
+            position: absolute;
+            top: 60px;
+        }
+
+        .stickman .arm.left {
+            left: -15px;
+            transform: rotate(45deg);
+        }
+
+        .stickman .arm.right {
+            right: -15px;
+            transform: rotate(-45deg);
+        }
+
+        .stickman .leg {
+            width: 40px;
+            height: 2px;
+            background-color: #000;
+            position: absolute;
+            top: 95px;
+        }
+
+        .stickman .leg.left {
+            left: 5px;
+            transform: rotate(20deg);
+        }
+
+        .stickman .leg.right {
+            right: 5px;
+            transform: rotate(-20deg);
+        }
+
+        @keyframes kiss {
+            0%, 100% {
+                transform: translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateX(10px) rotate(5deg);
+            }
+        }
+
+        .gallery-button {
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .gallery-button:hover {
+            background-color: #ff4d6d;
+        }
+
+        /* Inicia oculto el botón de galería */
+        #galleryBtn {
+            display: none;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        <button id="valentineBtn">¡Haz clic aquí!</button>
+        <p id="message"></p>
+        <!-- Botón de galería oculto inicialmente -->
+        <button class="gallery-button" id="galleryBtn">Ver Galería ❤️</button>
+    </div>
+
+    <div class="stickman-container">
+        <div class="stickman">
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+        </div>
+        <div class="stickman">
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('valentineBtn');
+        const message = document.getElementById('message');
+        const galleryBtn = document.getElementById('galleryBtn');
+        const stickmanContainer = document.querySelector('.stickman-container');
+        const flowers = ['🌸', '🌺', '🌹', '🌷', '🌼', '💐', '🌻', '🏵️'];
+
+        btn.addEventListener('click', () => {
+            message.style.display = 'block';
+            message.textContent = '¡Gracias por ser mi San Valentín! ❤️';
+            btn.style.display = 'none';
+
+            // Hace que el botón de galería aparezca
+            galleryBtn.style.display = 'inline-block';ç
+                // Evento que redirige a galery.html
+
+            createHearts(100);
+            showStickmanAnimation();
+        });
+
+        // Ejemplo de acción para el botón "Ver Galería" (puede dirigir a otra página o abrir un modal, etc.)
+        galleryBtn.addEventListener('click', () => {
+            window.location.href = 'marco.html';
+        });
+
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    document.body.removeChild(heart);
+                }, 4000);
+            }
+        }
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.top = Math.random() * 100 + 'vh';
+            flower.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                document.body.removeChild(flower);
+            }, 15000);
+        }
+
+        function showStickmanAnimation() {
+            stickmanContainer.style.display = 'block';
+            const stickmen = document.querySelectorAll('.stickman');
+            stickmen.forEach((stickman, index) => {
+                stickman.style.animation = `kiss 1s ease-in-out ${index * 0.5}s infinite`;
+            });
+            setInterval(() => createHearts(10), 1000);
+        }
+
+        // Crea más flores con frecuencia
+        setInterval(createFlower, 100);
+    </script>
+</body>
+</html>
